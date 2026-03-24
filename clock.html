@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .clock {
+            margin: 10px;
+            font-size: 2em;
+            padding: 20px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="utc" class="clock">UTC: </div>
+    <div id="est" class="clock">EST: </div>
+    <div id="pst" class="clock">PST: </div>
+    <script>
+        function updateClocks() {
+            const now = new Date();
+            const utc = now.toUTCString();
+            const est = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' })).toLocaleString();
+            const pst = new Date(now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' })).toLocaleString();
+
+            document.getElementById('utc').textContent = 'UTC: ' + utc;
+            document.getElementById('est').textContent = 'EST: ' + est;
+            document.getElementById('pst').textContent = 'PST: ' + pst;
+        }
+        setInterval(updateClocks, 1000);
+        updateClocks(); // Initial call
+    </script>
+</body>
+</html>
